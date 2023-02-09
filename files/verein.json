@@ -1,0 +1,225 @@
+{
+    "$schema": "https://raw.githubusercontent.com/educorvi/rita/alpha/rita-core/src/schema/schema.json",
+    "rules": [
+        {
+            "id": "mitglied",
+            "comment": "Es soll nur an Personen ausgezahlt werden, die Mitglied im Verein sind.",
+            "rule": {
+                "type": "atom",
+                "path": "auszahlung.empfaenger.istMitglied"
+            }
+        },
+        {
+            "id": "genehmigt",
+            "comment": "Die Auszahlung muss zu einem der vom Verein genehmigten Projekte erfolgen. Genehmigungen, die  älter als 365 Tage sind, sind ungültig.",
+            "rule": {
+                "type": "and",
+                "arguments": [
+                    {
+                        "type": "atom",
+                        "path": "projekt.genehmigt"
+                    },
+                    {
+                        "type": "comparison",
+                        "operation": "smallerOrEqual",
+                        "arguments": [
+                            {
+                                "type": "dateCalculation",
+                                "dateResultUnit": "days",
+                                "operation": "subtract",
+                                "arguments": [
+                                    {
+                                        "type": "atom",
+                                        "isDate": true,
+                                        "path": "auszahlung.beantragungsdatum"
+                                    },
+                                    {
+                                        "type": "atom",
+                                        "isDate": true,
+                                        "path": "projekt.genehmigtAm"
+                                    }
+                                ]
+                            },
+                            365
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "pi",
+            "comment": "Der auszuschüttende Betrag muss stets ein Vielfaches von 3.14 sein",
+            "rule": {
+                "type": "comparison",
+                "operation": "equal",
+                "arguments": [
+                    {
+                        "type": "calculation",
+                        "operation": "modulo",
+                        "arguments": [
+                            {
+                                "type": "atom",
+                                "path": "auszahlung.betrag"
+                            },
+                            3.14
+                        ]
+                    },
+                    0
+                ]
+            }
+        },
+        {
+            "id": "auszahlungsrahmen",
+            "comment": "Eine Auszahlung muss geringer sein als die maximal erlaubte Höhe für das Projekt,aber größer als 0€",
+            "rule": {
+                "type": "and",
+                "arguments": [
+                    {
+                        "type": "comparison",
+                        "operation": "smallerOrEqual",
+                        "arguments": [
+                            {
+                                "type": "atom",
+                                "path": "auszahlung.betrag"
+                            },
+                            {
+                                "type": "atom",
+                                "path": "projekt.intialeAusschuettung"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "comparison",
+                        "operation": "greater",
+                        "arguments": [
+                            {
+                                "type": "atom",
+                                "path": "auszahlung.betrag"
+                            },
+                            0
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "limiterung",
+            "comment": "Funktion zur Limitierung der Auszahlungen",
+            "rule": {
+                "type": "and",
+                "arguments": [
+                    {
+                        "type": "comparison",
+                        "operation": "smallerOrEqual",
+                        "arguments": [
+                            {
+                                "type": "atom",
+                                "path": "auszahlung.vorangegangene"
+                            },
+                            4
+                        ]
+                    },
+                    {
+                        "type": "comparison",
+                        "operation": "smallerOrEqual",
+                        "arguments": [
+                            {
+                                "type": "atom",
+                                "path": "auszahlung.betrag"
+                            },
+                            {
+                                "type": "calculation",
+                                "operation": "multiply",
+                                "arguments": [
+                                    {
+                                        "type": "atom",
+                                        "path": "projekt.intialeAusschuettung"
+                                    },
+                                    {
+                                        "type": "calculation",
+                                        "operation": "add",
+                                        "arguments": [
+                                            {
+                                                "type": "calculation",
+                                                "operation": "divide",
+                                                "arguments": [
+                                                    1,
+                                                    {
+                                                        "type": "calculation",
+                                                        "operation": "subtract",
+                                                        "arguments": [
+                                                            {
+                                                                "type": "atom",
+                                                                "path": "auszahlung.vorangegangene"
+                                                            },
+                                                            5
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            1.2
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "integritaet",
+            "comment": "n ∈ Nu{0} und a ∈ R+",
+            "rule": {
+                "type": "and",
+                "arguments": [
+                    {
+                        "type": "comparison",
+                        "operation": "greater",
+                        "arguments": [
+                            {
+                                "type": "atom",
+                                "path": "auszahlung.betrag"
+                            },
+                            0
+                        ]
+                    },
+                    {
+                        "type": "and",
+                        "arguments": [
+                            {
+                                "type": "comparison",
+                                "operation": "greaterOrEqual",
+                                "arguments": [
+                                    {
+                                        "type": "atom",
+                                        "path": "auszahlung.vorangegangene"
+                                    },
+                                    0
+                                ]
+                            },
+                            {
+                                "type": "comparison",
+                                "operation": "equal",
+                                "arguments": [
+                                    {
+                                        "type": "calculation",
+                                        "operation": "modulo",
+                                        "arguments": [
+                                            {
+                                                "type": "atom",
+                                                "path": "auszahlung.vorangegangene"
+                                            },
+                                            1
+                                        ]
+                                    },
+                                    0
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}

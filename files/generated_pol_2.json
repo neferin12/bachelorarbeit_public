@@ -1,0 +1,247 @@
+[
+    {
+      "id": "e0",
+      "rule": {
+        "type": "comparison",
+        "operation": "equal",
+        "arguments": [
+          0,
+          {
+            "type": "calculation",
+            "operation": "add",
+            "arguments": [
+              {
+                "type": "calculation",
+                "operation": "multiply",
+                "arguments": [
+                  {
+                    "type": "atom",
+                    "path": "a2"
+                  },
+                  0
+                ]
+              },
+              {
+                "type": "calculation",
+                "operation": "add",
+                "arguments": [
+                  {
+                    "type": "calculation",
+                    "operation": "multiply",
+                    "arguments": [
+                      {
+                        "type": "atom",
+                        "path": "a1"
+                      },
+                      0
+                    ]
+                  },
+                  {
+                    "type": "atom",
+                    "path": "a0"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "dates": false
+      },
+      "comment": "0=a_2*0^2+a_1*0^1+a0"
+    },
+    {
+      "id": "e1",
+      "rule": {
+        "type": "comparison",
+        "operation": "equal",
+        "arguments": [
+          0,
+          {
+            "type": "calculation",
+            "operation": "add",
+            "arguments": [
+              {
+                "type": "calculation",
+                "operation": "multiply",
+                "arguments": [
+                  {
+                    "type": "atom",
+                    "path": "a2"
+                  },
+                  1
+                ]
+              },
+              {
+                "type": "calculation",
+                "operation": "add",
+                "arguments": [
+                  {
+                    "type": "calculation",
+                    "operation": "multiply",
+                    "arguments": [
+                      {
+                        "type": "atom",
+                        "path": "a1"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "type": "atom",
+                    "path": "a0"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "dates": false
+      },
+      "comment": "0=a_2*1^2+a_1*1^1+a0"
+    },
+    {
+      "id": "zero_cond",
+      "rule": {
+        "arguments": [
+          {
+            "arguments": [
+              {
+                "type": "comparison",
+                "operation": "equal",
+                "arguments": [
+                  0,
+                  {
+                    "type": "atom",
+                    "path": "a2"
+                  }
+                ],
+                "dates": false
+              }
+            ],
+            "type": "not"
+          },
+          {
+            "arguments": [
+              {
+                "type": "comparison",
+                "operation": "equal",
+                "arguments": [
+                  0,
+                  {
+                    "type": "atom",
+                    "path": "a1"
+                  }
+                ],
+                "dates": false
+              }
+            ],
+            "type": "not"
+          }
+        ],
+        "type": "and"
+      },
+      "comment": "for n>0: a_n != 0"
+    },
+    {
+      "id": "limits",
+      "rule": {
+        "arguments": [
+          {
+            "arguments": [
+              {
+                "type": "comparison",
+                "operation": "greater",
+                "arguments": [
+                  1000,
+                  {
+                    "type": "atom",
+                    "path": "a2"
+                  }
+                ],
+                "dates": false
+              },
+              {
+                "type": "comparison",
+                "operation": "smaller",
+                "arguments": [
+                  -1000,
+                  {
+                    "type": "atom",
+                    "path": "a2"
+                  }
+                ],
+                "dates": false
+              }
+            ],
+            "type": "and"
+          },
+          {
+            "arguments": [
+              {
+                "arguments": [
+                  {
+                    "type": "comparison",
+                    "operation": "greater",
+                    "arguments": [
+                      1000,
+                      {
+                        "type": "atom",
+                        "path": "a1"
+                      }
+                    ],
+                    "dates": false
+                  },
+                  {
+                    "type": "comparison",
+                    "operation": "smaller",
+                    "arguments": [
+                      -1000,
+                      {
+                        "type": "atom",
+                        "path": "a1"
+                      }
+                    ],
+                    "dates": false
+                  }
+                ],
+                "type": "and"
+              },
+              {
+                "arguments": [
+                  {
+                    "type": "comparison",
+                    "operation": "greater",
+                    "arguments": [
+                      1000,
+                      {
+                        "type": "atom",
+                        "path": "a0"
+                      }
+                    ],
+                    "dates": false
+                  },
+                  {
+                    "type": "comparison",
+                    "operation": "smaller",
+                    "arguments": [
+                      -1000,
+                      {
+                        "type": "atom",
+                        "path": "a0"
+                      }
+                    ],
+                    "dates": false
+                  }
+                ],
+                "type": "and"
+              }
+            ],
+            "type": "and"
+          }
+        ],
+        "type": "and"
+      },
+      "comment": "-1000<a_n<1000"
+    }
+  ]
+  

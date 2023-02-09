@@ -1,0 +1,69 @@
+[
+    {
+      "id": "g0_0",
+      "rule": {
+        "type": "comparison",
+        "operation": "equal",
+        "arguments": [
+          52,
+          {
+            "type": "calculation",
+            "operation": "add",
+            "arguments": [
+              {
+                "type": "calculation",
+                "operation": "multiply",
+                "arguments": [
+                  {
+                    "type": "atom",
+                    "path": "m0"
+                  },
+                  126
+                ]
+              },
+              {
+                "type": "atom",
+                "path": "t0"
+              }
+            ]
+          }
+        ],
+        "dates": false
+      },
+      "comment": "52=m_0*126+t"
+    },
+    {
+      "id": "g0_1",
+      "rule": {
+        "type": "comparison",
+        "operation": "equal",
+        "arguments": [
+          41,
+          {
+            "type": "calculation",
+            "operation": "add",
+            "arguments": [
+              {
+                "type": "calculation",
+                "operation": "multiply",
+                "arguments": [
+                  {
+                    "type": "atom",
+                    "path": "m0"
+                  },
+                  216
+                ]
+              },
+              {
+                "type": "atom",
+                "path": "t0"
+              }
+            ]
+          }
+        ],
+        "dates": false
+      },
+      "comment": "41=m_0*216+t"
+    }
+  ]
+  
