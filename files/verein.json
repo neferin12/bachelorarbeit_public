@@ -1,3 +1,4 @@
+// verein.json
 {
     "$schema": "https://raw.githubusercontent.com/educorvi/rita/alpha/rita-core/src/schema/schema.json",
     "rules": [
