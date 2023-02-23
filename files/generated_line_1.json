@@ -1,11 +1,13 @@
-[
+{
+  "$schema": "https://raw.githubusercontent.com/educorvi/rita/alpha/rita-core/src/schema/schema.json",
+  "rules": [
     {
       "id": "g0_0",
       "rule": {
         "type": "comparison",
         "operation": "equal",
         "arguments": [
-          52,
+          196,
           {
             "type": "calculation",
             "operation": "add",
@@ -18,7 +20,7 @@
                     "type": "atom",
                     "path": "m0"
                   },
-                  126
+                  21
                 ]
               },
               {
@@ -30,7 +32,7 @@
         ],
         "dates": false
       },
-      "comment": "52=m_0*126+t"
+      "comment": "196=m_0*21+t"
     },
     {
       "id": "g0_1",
@@ -38,7 +40,7 @@
         "type": "comparison",
         "operation": "equal",
         "arguments": [
-          41,
+          17,
           {
             "type": "calculation",
             "operation": "add",
@@ -51,7 +53,7 @@
                     "type": "atom",
                     "path": "m0"
                   },
-                  216
+                  127
                 ]
               },
               {
@@ -63,7 +65,7 @@
         ],
         "dates": false
       },
-      "comment": "41=m_0*216+t"
+      "comment": "17=m_0*127+t"
     }
   ]
-  
+}
